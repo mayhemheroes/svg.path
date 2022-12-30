@@ -2,9 +2,8 @@ project: svg-path
 target: fuzz-svg
 testsuite:
     - file://mayhem/testsuite
-
+duration: 600
 cmds:
   - cmd: /src/mayhem/fuzz_svg.py
     libfuzzer: true
     timeout: 12
-    duration: 600
