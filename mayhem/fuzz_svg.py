@@ -16,7 +16,7 @@ def TestOneInput(data):
     except (InvalidPathError, ValueError):
         return -1
     except (TypeError, AttributeError, IndexError):
-        if random.random() > 0.999:
+        if random.random() > 0.99:
             raise
         return -1
 def main():
