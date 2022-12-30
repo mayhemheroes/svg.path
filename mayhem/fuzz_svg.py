@@ -4,7 +4,7 @@ import sys
 import fuzz_helpers
 import random
 
-with atheris.instrument_imports():
+with atheris.instrument_imports(include=['svg']):
     from svg.path import parse_path
 
 from svg.path.parser import InvalidPathError
@@ -16,7 +16,7 @@ def TestOneInput(data):
     except (InvalidPathError, ValueError):
         return -1
     except (TypeError, AttributeError, IndexError):
-        if random.random() > 0.99:
+        if random.random() > 0.999:
             raise
         return -1
 def main():
