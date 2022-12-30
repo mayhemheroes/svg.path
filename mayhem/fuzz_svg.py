@@ -13,10 +13,10 @@ def TestOneInput(data):
     fdp = fuzz_helpers.EnhancedFuzzedDataProvider(data)
     try:
         parse_path(fdp.ConsumeRemainingString())
-    except (InvalidPathError):
+    except (InvalidPathError, ValueError):
         return -1
-    except (TypeError, ValueError, AttributeError, IndexError):
-        if random.random() > 0.99:
+    except (TypeError, AttributeError, IndexError):
+        if random.random() > 0.999:
             raise
         return -1
 def main():
