@@ -6,4 +6,5 @@ testsuite:
 cmds:
   - cmd: /src/mayhem/fuzz_svg.py
     libfuzzer: true
-    timeout: 10
+    timeout: 12
+    duration: 600
