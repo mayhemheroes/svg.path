@@ -1,0 +1,21 @@
+# Mayhem target: svg.path SVG path-data parser (Atheris/libFuzzer harness).
+# The cmd binary is the compiled ELF launcher that drives mayhem/fuzz_svg.py; Atheris instruments
+# the svg.path library so the run records coverage (edges). Mirrors the fork's original `fuzz-svg`
+# target (parse_path on a fuzzer-generated path string) — same project/target names so run history
+# is preserved.
+project: svg-path
+target: fuzz-svg
+
+cmds:
+  - cmd: /mayhem/fuzz-svg
+    libfuzzer: true
+    timeout: 12
+
+# Seed corpus of representative SVG path d-strings (canonical two-entry form: server tar + local).
+# The owner/project is hardcoded (not $MAYHEM_PROJECT): mcode derives $MAYHEM_PROJECT from the
+# GitHub repo name "svg.path", but the Mayhem project's real slug is "svg-path" — the dotted name
+# fails the run-creation testsuite ACL check ("You do not have access to use a test suite from the
+# project svg.path"). The target stays keyed on the literal $MAYHEM_TARGET.
+testsuite:
+  - https://$MAYHEM_DOMAIN/mayhemheroes/svg-path/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz-svg/testsuite
